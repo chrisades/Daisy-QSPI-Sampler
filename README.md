@@ -112,7 +112,7 @@ If the sample bank failed validation and didn't load,`Example.cpp` catches this 
 
 1. Download the [`samples.bin`](https://github.com/chrisades/Daisy-QSPI-Sampler/releases/download/v0.1/samples.bin) storage binary and the [`Example.bin`](https://github.com/chrisades/Daisy-QSPI-Sampler/releases/download/v0.1/Example.bin) program binary.
 
-2. Visit the <a href="https://flash.daisy.audio/" target="_blank">Daisy Seed web programmer</a>.
+2. Visit the <a class="link" target="_blank" href="https://flash.daisy.audio/">Daisy Seed web programmer</a>.
 
 3. Go to Bootloader, flash the Daisy bootloader (v5.4 default works fine) and press the BOOT button on the Daisy right after download (you should see a 'breathing' LED)
 
