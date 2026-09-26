@@ -1,6 +1,6 @@
 # Play WAV files on the Daisy Seed without an SD Card
 
----
+
 
 This is an example project showing how to utilize the QSPI memory region on the Daisy Seed to store sounds that can be loaded and played in realtime, no SD Card required.
 
@@ -12,7 +12,7 @@ It does so with two binary files, one for the audio data flashed onto the Seed's
 
 ## PREREQUISITES
 
----
+
 
 - [Daisy Toolchain](https://docs.daisy.audio/tutorials/cpp-dev-env/) (ARM GCC + make)
 - [Python](https://www.python.org/downloads/) 
@@ -22,7 +22,7 @@ It does so with two binary files, one for the audio data flashed onto the Seed's
 
 ## CONTENT
 
----
+
 
 ```
 .
@@ -38,7 +38,7 @@ It does so with two binary files, one for the audio data flashed onto the Seed's
 
 ## INSTRUCTIONS FOR RUNNING PROJECT
 
----
+
 
 This repo is meant to live inside the `seed` folder of the [DaisyExamples](https://github.com/daisyaudio/DaisyExamples) repo.
 
@@ -109,7 +109,7 @@ You should now hear the uploaded samples being played back at varying levels and
 
 ## TROUBLESHOOTING
 
----
+
 
 If the sample bank failed validation and didn't load,`Example.cpp` catches this and drops into a loop that blinks the LED and prints diagnostics. You can connect to the Daisy's serial port to read them. Likely causes:
 
@@ -120,7 +120,7 @@ If the sample bank failed validation and didn't load,`Example.cpp` catches this 
 
 ## INSTALLING WITH DAISY WEB PROGRAMMER
 
----
+
 
 1. Download the [storage binary file]() and the [program binary file]().
 
@@ -138,7 +138,7 @@ If the sample bank failed validation and didn't load,`Example.cpp` catches this 
 
 ## NOTES FOR MODIFYING
 
----
+
 
 #### Sample Rate
 
@@ -294,4 +294,4 @@ int main(void)
 
 ## CREDITS
 
----
+
