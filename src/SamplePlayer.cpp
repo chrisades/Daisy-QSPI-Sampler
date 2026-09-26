@@ -360,12 +360,12 @@ float SamplePlayer::Process()
 
         const uint32_t index = static_cast<uint32_t>(voice.position);
         const float fraction = voice.position - static_cast<float>(index);
-        const float sample_a = pcm_[index] / 32768.0f;
-        const float sample_b = pcm_[index + 1] / 32768.0f;
-        const float sample = sample_a + (sample_b - sample_a) * fraction;
+        const float sample_a = pcm_[index];
+        const float sample_b = pcm_[index + 1];
+        const float sample = (sample_a + (sample_b - sample_a) * fraction) / 32768.0f;
 
         const bool silent = voice.restarting || !voice.playing;
-        fonepole(voice.gain, silent ? 0.0f : 1.0f, 0.001f);
+        fonepole(voice.gain, silent ? 0.0f : 1.0f, 0.01f);
 
         output += sample * voice.level * voice.gain;
 

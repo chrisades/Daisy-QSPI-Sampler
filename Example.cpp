@@ -29,10 +29,9 @@ void AudioCallback(AudioHandle::InputBuffer  in, AudioHandle::OutputBuffer out, 
 
             const char *clipName = sampler.GetClipName(clip);
 
-            float randLevel = daisy::Random::GetFloat(0.1f, 0.3f);
-            float randSpeed = daisy::Random::GetFloat(0.1f, 2.0f);
+            float randSpeed = daisy::Random::GetFloat(0.3f, 2.0f);
 
-            sampler.SetLevel(clipName, randLevel); // set the level of the clip
+            sampler.SetLevel(clipName, 0.35f); // set the level of the clip
             sampler.SetSpeed(clipName, randSpeed); // set the playback speed of the clip
             sampler.Replay(clipName); // trigger clip replay
             clip = (clip + 1) % numClips; // choose next clip
@@ -48,7 +47,7 @@ void AudioCallback(AudioHandle::InputBuffer  in, AudioHandle::OutputBuffer out, 
 int main(void)
 {
     hw.Init();
-    hw.SetAudioSampleRate(daisy::SaiHandle::Config::SampleRate::SAI_48KHZ);
+    hw.SetAudioSampleRate(daisy::SaiHandle::Config::SampleRate::SAI_96KHZ);
     hw.SetAudioBlockSize(4);
     float sampleRate = hw.AudioSampleRate();
 
@@ -73,7 +72,7 @@ int main(void)
         }
     }
 
-    metronome.Init(1.0f, sampleRate); // 1.0hz metronome to trigger samples
+    metronome.Init(2.0f, sampleRate); // 2.0hz metronome to trigger samples
 
     hw.StartAudio(AudioCallback);
 

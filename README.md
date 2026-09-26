@@ -5,7 +5,6 @@
 This is an example project showing how to utilize the QSPI memory region on the Daisy Seed to store sounds that can be loaded and played in realtime, no SD Card required.
 
 
-
 It does so with two binary files, one for the audio data flashed onto the Seed's QSPI memory, and one for the main program stored in the Seed's default flash region.
 
 <br>
@@ -28,7 +27,7 @@ It does so with two binary files, one for the audio data flashed onto the Seed's
 .
 ├── samples/            - folder containing wav files
 ├── wav2bin.py          - python script that converts all the samples to one binary file
-├── Example.cpp         - main program that loads sound data and plays each clip at randomized speeds and output levels
+├── Example.cpp         - main program that loads sound data and plays each clip at randomized speeds
 └── src/
     ├── SamplePlayer.h  - Sampler class used by Example.cpp that allows the play/pause/restarting of multiple samples by name
     └── SamplePlayer.cpp
@@ -47,7 +46,7 @@ This repo is meant to live inside the `seed` folder of the [DaisyExamples](https
 **Step 0:** Clone Daisy Examples if you haven't already
 
 ```shell
-$ git clone --recurse-submodules https://github.com/electro-smith/DaisyExamples ~/Desktop/DaisyExamples
+git clone --recurse-submodules https://github.com/electro-smith/DaisyExamples ~/Desktop/DaisyExamples
 ```
 
 <br>
@@ -55,9 +54,9 @@ $ git clone --recurse-submodules https://github.com/electro-smith/DaisyExamples 
 **Step 1:** Clone this repository in the proper folder and enter it
 
 ```shell
-$ cd ~/Desktop/DaisyExamples/seed
-$ git clone https://github.com/chrisades/Daisy-QSPI-Sampler.git
-$ cd Daisy-QSPI-Sampler
+cd ~/Desktop/DaisyExamples/seed
+git clone https://github.com/chrisades/Daisy-QSPI-Sampler.git
+cd Daisy-QSPI-Sampler
 ```
 
 <br>
@@ -65,7 +64,7 @@ $ cd Daisy-QSPI-Sampler
 **Step 2:** Load custom samples (or keep the default ones) in the `samples` folder and run the python script
 
 ```shell
-$ python wav2bin.py samples/
+python wav2bin.py samples/ --rate 96000
 ```
 
 <br>
@@ -73,7 +72,7 @@ $ python wav2bin.py samples/
 **Step 3:** Flash the Daisy bootloader
 
 ```shell
-$ make program-boot
+make program-boot
 ```
 
 after success, hit the BOOT button on the seed to maintain boot flash mode. You should see an endlessly 'breathing' LED.
@@ -83,7 +82,7 @@ after success, hit the BOOT button on the seed to maintain boot flash mode. You 
 **Step 4:** Load sample bank binary into the QSPI memory region by running
 
 ```shell
-$ dfu-util -a 0 -s 0x90040000 -D samples.bin -d 0483:df11
+dfu-util -a 0 -s 0x90040000 -D samples.bin -d 0483:df11
 ```
 
 <br>
@@ -91,11 +90,11 @@ $ dfu-util -a 0 -s 0x90040000 -D samples.bin -d 0483:df11
 **Step 5:** Enter the regular boot mode on the seed by holding BOOT then RESET, and releasing RESET then BOOT, then run
 
 ```shell
-$ make clean && make
-$ make program-dfu
+make clean && make
+make program-dfu
 ```
 
-You should now hear the uploaded samples being played back at varying levels and speeds. 
+You should now hear the uploaded samples being played back at varying speeds. 
 
 <br><br>
 
@@ -105,7 +104,7 @@ You should now hear the uploaded samples being played back at varying levels and
 
 If the sample bank failed validation and didn't load,`Example.cpp` catches this and drops into a loop that blinks the LED and prints diagnostics. You can connect to the Daisy's serial port to read them. Likely causes:
 
-- `samples.bin` was flashed to a different QSPI address than `QSPI_START` in `Example.cpp` 
+- `samples.bin` was flashed to a QSPI address different than the `QSPI_START` constant in `Example.cpp` 
 - The bank has more than 128 clips, or the flash write was interrupted or truncated
 
 <br><br>
@@ -134,22 +133,20 @@ If the sample bank failed validation and didn't load,`Example.cpp` catches this 
 
 `wav2bin.py` accepts different wav files of varying sample rates and converts them all to specified rate. So, make sure the rate you enter in **Step 2** is identical to the sample rate you set for your Daisy hardware object. If the rates don't match, clips will still load and play, just at the wrong pitch/speed. The sample rate stored in the bank isn't automatically resampled to the hardware's rate at runtime.
 
-For example, if you ran
-
-```shell
-$ python wav2bin.py samples/ --rate 96000
-```
-
-then in your initialization be sure to set
-
+For example, if you set your initialization as
 ```c++
 int main(void)
 {
     hw.Init();
-    hw.SetAudioSampleRate(Daisy::SaiHandle::Config::SampleRate::SAI_96KHZ);
+    hw.SetAudioSampleRate(Daisy::SaiHandle::Config::SampleRate::SAI_48KHZ);
 
     // ...
 }
+```
+then be sure to run
+
+```shell
+python wav2bin.py samples/ --rate 48000
 ```
 
 `wav2bin.py` has a few other custom options like
@@ -164,7 +161,7 @@ int main(void)
 for the full list run
 
 ```shell
-$ python wav2bin.py --help
+python wav2bin.py --help
 ```
 
 <br>
@@ -186,7 +183,7 @@ I followed this convention so that the `samples.bin` file could be flashed using
 Though if you don't care about being able to have your bin loaded using the webprogrammer, or you really need to use that extra 256kB, then you can choose the storage address in **Step 4** to be `0x90000000`. 
 
 ```shell
-$ dfu-util -a 0 -s 0x90000000 -D samples.bin -d 0483:df11
+dfu-util -a 0 -s 0x90000000 -D samples.bin -d 0483:df11
 ```
 
 Just be sure to also alter the memory address that the SamplePlayer reads in `Example.cpp`.
@@ -201,21 +198,21 @@ For reference, the various memory address locations for the Daisy can be found [
 
 #### SDRAM
 
-In `Example.cpp` the sound bank binary stored in QSPI is copied over onto SDRAM. The purpose for this is that SDRAM has higher performance when it comes to realtime operations. For ease of use, `Example.cpp` allocates the full `0x90040000` to `0x90800000`(~7.75MB) size even though the size of `samples.bin` will probably be smaller than that. If you'd like to not waste the uneeded space you can use the start and end addresses printed at the bottom after running `wav2bin.py`.
+In `Example.cpp` the sound bank binary stored in QSPI is copied over onto SDRAM. The purpose for this is that SDRAM has allows faster, more predictable random access than QSPI. For ease of use, `Example.cpp` allocates the full `0x90040000` to `0x90800000`(~7.75MB) size even though the size of `samples.bin` will probably be smaller than that. If you'd like to not waste the uneeded space you can use the start and end addresses printed at the bottom after running `wav2bin.py`.
 
 For example let's say I run
 
 ```shell
-$ python wav2bin.py samples/ --address 0x90040000
+python wav2bin.py samples/ --address 0x90040000
 ```
 
 and the bottom output says
 
 ```shell
-   bank will occupy 0x90040000 - 0x901d0ad2
+  bank will occupy 0x90040000 - 0x901d0ad2
 ```
 
-then, in `Example.cpp`, I'll set
+then, in `Example.cpp`, I should set set
 
 ```c++
 constexpr uint32_t QSPI_START = 0x90040000; // QSPI binary storage start address
@@ -283,6 +280,6 @@ int main(void)
 
 <br><br>
 
-## CREDITS
+Samples taken from [the-open-sorce-drumkit](https://github.com/crabacus/the-open-source-drumkit).
 
 
