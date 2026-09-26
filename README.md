@@ -116,7 +116,7 @@ If the sample bank failed validation and didn't load,`Example.cpp` catches this 
 
 2. Visit [Daisy Seed web programmer](https://flash.daisy.audio/).
 
-3. Flash the Daisy bootloader (v5.4 default works fine) and press the BOOT button on the Daisy right after download (you should see a 'breathing' LED)
+3. Go to Bootloader, flash the Daisy bootloader (v5.4 default works fine) and press the BOOT button on the Daisy right after download (you should see a 'breathing' LED)
 
 4. Go to File Upload and upload `samples.bin` (you can ignore the invalid Daisy binary error)
 
