@@ -52,7 +52,7 @@ $ git clone --recurse-submodules https://github.com/electro-smith/DaisyExamples 
 
 <br>
 
-**Step 1:** Clone this repository in the proper folder
+**Step 1:** Clone this repository in the proper folder and enter it
 
 ```shell
 $ cd ~/Desktop/DaisyExamples/seed
@@ -76,7 +76,7 @@ $ python wav2bin.py samples/
 $ make program-boot
 ```
 
-after success, hit the BOOT button on the seed to enter boot flash mode so you can drop in the binary. You should see an endlessly 'breathing' LED.
+after success, hit the BOOT button on the seed to maintain boot flash mode so you can drop in the storage binary. You should see an endlessly 'breathing' LED.
 
 <br>
 
@@ -111,8 +111,6 @@ If the sample bank failed validation and didn't load,`Example.cpp` catches this 
 <br><br>
 
 ## INSTALLING WITH DAISY WEB PROGRAMMER
-
-
 
 1. Download the [storage binary file]() and the [program binary file]().
 
