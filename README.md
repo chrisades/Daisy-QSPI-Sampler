@@ -18,7 +18,7 @@ It does so with two binary files, one for the audio data flashed onto the Seed's
 - [Python](https://www.python.org/downloads/) 
 - **Windows:** use [Git Bash](https://git-scm.com/downloads) to run the commands below
 
-
+<br><br>
 
 ## CONTENT
 
@@ -34,7 +34,7 @@ It does so with two binary files, one for the audio data flashed onto the Seed's
     └── SamplePlayer.cpp
 ```
 
-
+<br><br>
 
 ## INSTRUCTIONS FOR RUNNING PROJECT
 
@@ -42,17 +42,17 @@ It does so with two binary files, one for the audio data flashed onto the Seed's
 
 This repo is meant to live inside the `seed` folder of the [DaisyExamples](https://github.com/daisyaudio/DaisyExamples) repo.
 
+<br>
 
-
-- **Step 0:** Clone Daisy Examples if you haven't already
+**Step 0:** Clone Daisy Examples if you haven't already
 
 ```shell
 $ git clone --recurse-submodules https://github.com/electro-smith/DaisyExamples ~/Desktop/DaisyExamples
 ```
 
+<br>
 
-
-- **Step 1:** Clone this repository in the proper folder
+**Step 1:** Clone this repository in the proper folder
 
 ```shell
 $ cd ~/Desktop/DaisyExamples/seed
@@ -60,17 +60,17 @@ $ git clone https://github.com/chrisades/Daisy-QSPI-Sampler.git
 $ cd Daisy-QSPI-Sampler
 ```
 
+<br>
 
-
-- **Step 2:** Load custom samples (or keep the default ones) in the `samples` folder and run the python script
+**Step 2:** Load custom samples (or keep the default ones) in the `samples` folder and run the python script
 
 ```shell
 $ python wav2bin.py samples/
 ```
 
+<br>
 
-
-- **Step 3:** Flash Daisy bootloader
+**Step 3:** Flash Daisy bootloader
 
 ```shell
 $ make program-boot
@@ -78,17 +78,17 @@ $ make program-boot
 
 after success, hit the BOOT button on the seed to enter boot flash mode so you can drop in the binary. You should see an endlessly 'breathing' LED.
 
+<br>
 
-
-- **Step 4:** Load sample bank binary into the QSPI memory region by running
+**Step 4:** Load sample bank binary into the QSPI memory region by running
 
 ```shell
 $ dfu-util -a 0 -s 0x90040000 -D samples.bin -d 0483:df11
 ```
 
+<br>
 
-
-- **Step 5:** Enter the regular boot mode on the seed by holding BOOT then RESET, and releasing RESET then BOOT, then run
+**Step 5:** Enter the regular boot mode on the seed by holding BOOT then RESET, and releasing RESET then BOOT, then run
 
 ```shell
 $ make clean && make
@@ -97,7 +97,7 @@ $ make program-dfu
 
 You should now hear the uploaded samples being played back at varying levels and speeds. 
 
-
+<br><br>
 
 ## TROUBLESHOOTING
 
@@ -108,7 +108,7 @@ If the sample bank failed validation and didn't load,`Example.cpp` catches this 
 - `samples.bin` was flashed to a different QSPI address than `QSPI_START` in `Example.cpp` 
 - The bank has more than 128 clips, or the flash write was interrupted or truncated
 
-
+<br><br>
 
 ## INSTALLING WITH DAISY WEB PROGRAMMER
 
@@ -126,11 +126,11 @@ If the sample bank failed validation and didn't load,`Example.cpp` catches this 
 
 6. Go to File Upload and upload `Example.bin`
 
-
+<br><br>
 
 ## NOTES FOR MODIFYING
 
-
+<br>
 
 #### Sample Rate
 
@@ -169,7 +169,7 @@ for the full list run
 $ python wav2bin.py --help
 ```
 
-
+<br>
 
 #### Clip Limits
 
@@ -177,7 +177,7 @@ In this example project, each sample bank can have a max of 128 clips, and each 
 
 Names longer than that are truncated, and if a duplicate somehow occurs, the SamplePlayer class will only ever find the first one it sees when calling its member functions.
 
-
+<br>
 
 #### QSPI
 
@@ -199,7 +199,7 @@ constexpr uint32_t QSPI_START = 0x90000000; // QSPI binary storage start address
 
 For reference, the various memory address locations for the Daisy can be found [here](https://github.com/electro-smith/libDaisy/blob/master/core/STM32H750IB_flash.lds).
 
-
+<br>
 
 #### SDRAM
 
@@ -237,7 +237,7 @@ constexpr uint32_t QSPI_START = 0x90040000;
 // memcpy(SDRAM_BANK, reinterpret_cast<const void*>(QSPI_START), SAMPLE_BANK_SIZE);
 sampler.Init(QSPI_START, sampleRate);
 ```
-
+<br>
 #### Stereo Audio
 
 Due to the small memory size we are working with, the `wav2bin.py` script automatically mixes all stereo files into mono. If you want to replicate a stereo audio image, you'd have to split it up in two seperate mono wav files and place them in your `samples` folder, before running `wav2bin.py`. This split can be done in most DAWs or using [ffmpeg](https://ffmpeg.org/download.html) in the terminal:
@@ -282,7 +282,7 @@ int main(void)
 }
 ```
 
-
+<br><br>
 
 ## CREDITS
 
