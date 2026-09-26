@@ -9,16 +9,6 @@ It does so with two binary files, one for the audio data flashed onto the Seed's
 
 <br>
 
-## PREREQUISITES
-
-
-
-- [Daisy Toolchain](https://docs.daisy.audio/tutorials/cpp-dev-env/) (ARM GCC + make)
-- [Python](https://www.python.org/downloads/) 
-- **Windows:** use [Git Bash](https://git-scm.com/downloads) to run the commands below
-
-<br>
-
 ## CONTENT
 
 
@@ -32,7 +22,17 @@ src/
     SamplePlayer.cpp
 ```
 
-<br><br>
+<br>
+
+## PREREQUISITES
+
+
+
+- [Daisy Toolchain](https://docs.daisy.audio/tutorials/cpp-dev-env/) (ARM GCC + make)
+- [Python](https://www.python.org/downloads/) 
+- **Windows:** use [Git Bash](https://git-scm.com/downloads) to run the commands below
+
+<br>
 
 ## INSTRUCTIONS FOR RUNNING PROJECT
 
