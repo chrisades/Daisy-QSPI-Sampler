@@ -8,7 +8,7 @@ This is an example project showing how to utilize the QSPI memory region on the 
 
 It does so with two binary files, one for the audio data flashed onto the Seed's QSPI memory, and one for the main program stored in the Seed's default flash region.
 
-<br><br>
+<br>
 
 ## PREREQUISITES
 
@@ -18,7 +18,7 @@ It does so with two binary files, one for the audio data flashed onto the Seed's
 - [Python](https://www.python.org/downloads/) 
 - **Windows:** use [Git Bash](https://git-scm.com/downloads) to run the commands below
 
-<br><br>
+<br>
 
 ## CONTENT
 
