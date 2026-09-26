@@ -6,7 +6,7 @@ This is an example project showing how to utilize the QSPI memory region on the 
 
 
 
-It does so with two binary files, one for the audio data flashed to the Seed's QSPI memory, and one for the main program stored in the Seed's default flash region.
+It does so with two binary files, one for the audio data flashed onto the Seed's QSPI memory, and one for the main program stored in the Seed's default flash region.
 
 
 
