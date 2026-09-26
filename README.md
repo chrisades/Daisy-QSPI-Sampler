@@ -126,7 +126,6 @@ If the sample bank failed validation and didn't load,`Example.cpp` catches this 
 
 ## NOTES FOR MODIFYING
 
-<br>
 
 #### Sample Rate
 
