@@ -24,13 +24,12 @@ It does so with two binary files, one for the audio data flashed onto the Seed's
 
 
 ```
-.
-├── samples/            - folder containing wav files
-├── wav2bin.py          - python script that converts all the samples to one binary file
-├── Example.cpp         - main program that loads sound data and plays each clip at randomized speeds
-└── src/
-    ├── SamplePlayer.h  - Sampler class used by Example.cpp that allows the play/pause/restarting of multiple samples by name
-    └── SamplePlayer.cpp
+samples/            - folder containing wav files
+wav2bin.py          - python script that converts all the samples to one binary file
+Example.cpp         - main program that loads sound data and plays each clip at randomized speeds
+src/
+    SamplePlayer.h  - Sampler class used by Example.cpp that allows the play/pause/restarting of multiple samples by name
+    SamplePlayer.cpp
 ```
 
 <br><br>
@@ -155,10 +154,11 @@ python wav2bin.py samples/ --rate 48000
 - `--fade-in` / `--fade-out` - fade length in ms applied to each clip (default 1.0 ms each, 0 to disable)
 - `--recursive` - also search subfolders of the input folder for `.wav` files
 - an output path can be given as a second argument
+```shell
+python wav2bin.py samples/ output.bin
+```
 
-
-
-for the full list run
+for the full list of options run
 
 ```shell
 python wav2bin.py --help
