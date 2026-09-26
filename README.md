@@ -110,7 +110,7 @@ If the sample bank failed validation and didn't load,`Example.cpp` catches this 
 
 ## INSTALLING WITH DAISY WEB PROGRAMMER
 
-1. Download the [storage binary file]() and the [program binary file]().
+1. Download the [`samples.bin`](https://github.com/chrisades/Daisy-QSPI-Sampler/releases/download/v0.1/samples.bin) storage binary and the [`Example.bin`](https://github.com/chrisades/Daisy-QSPI-Sampler/releases/download/v0.1/Example.bin) program binary.
 
 2. Visit [Daisy Seed web programmer](https://flash.daisy.audio/).
 
