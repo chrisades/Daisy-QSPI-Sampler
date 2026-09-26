@@ -76,7 +76,7 @@ $ python wav2bin.py samples/
 $ make program-boot
 ```
 
-after success, hit the BOOT button on the seed to maintain boot flash mode so you can drop in the storage binary. You should see an endlessly 'breathing' LED.
+after success, hit the BOOT button on the seed to maintain boot flash mode. You should see an endlessly 'breathing' LED.
 
 <br>
 
