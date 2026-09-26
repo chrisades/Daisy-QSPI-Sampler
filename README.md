@@ -44,9 +44,7 @@ This repo is meant to live inside the `seed` folder of the [DaisyExamples](https
 
 
 
-**Step 0** 
-
-Clone Daisy Examples if you haven't already
+- **Step 0:** Clone Daisy Examples if you haven't already
 
 ```shell
 $ git clone --recurse-submodules https://github.com/electro-smith/DaisyExamples ~/Desktop/DaisyExamples
@@ -54,9 +52,7 @@ $ git clone --recurse-submodules https://github.com/electro-smith/DaisyExamples 
 
 
 
-**Step 1** 
-
-Clone this repository in the proper folder
+- **Step 1:** Clone this repository in the proper folder
 
 ```shell
 $ cd ~/Desktop/DaisyExamples/seed
@@ -66,8 +62,7 @@ $ cd Daisy-QSPI-Sampler
 
 
 
-**Step 2**
-Load custom samples (or keep the default ones) in the `samples` folder and run the python script
+- **Step 2:** Load custom samples (or keep the default ones) in the `samples` folder and run the python script
 
 ```shell
 $ python wav2bin.py samples/
@@ -75,8 +70,7 @@ $ python wav2bin.py samples/
 
 
 
-**Step 3**
-Flash Daisy bootloader
+- **Step 3:** Flash Daisy bootloader
 
 ```shell
 $ make program-boot
@@ -86,8 +80,7 @@ after success, hit the BOOT button on the seed to enter boot flash mode so you c
 
 
 
-**Step 4**
-Load sample bank binary into the QSPI memory region by running
+- **Step 4:** Load sample bank binary into the QSPI memory region by running
 
 ```shell
 $ dfu-util -a 0 -s 0x90040000 -D samples.bin -d 0483:df11
@@ -95,8 +88,7 @@ $ dfu-util -a 0 -s 0x90040000 -D samples.bin -d 0483:df11
 
 
 
-**Step 5**
-Enter the regular boot mode on the seed by holding BOOT then RESET, and releasing RESET then BOOT, then run
+- **Step 5:** Enter the regular boot mode on the seed by holding BOOT then RESET, and releasing RESET then BOOT, then run
 
 ```shell
 $ make clean && make
