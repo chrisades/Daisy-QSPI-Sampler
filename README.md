@@ -236,6 +236,7 @@ constexpr uint32_t QSPI_START = 0x90040000;
 sampler.Init(QSPI_START, sampleRate);
 ```
 <br>
+
 #### Stereo Audio
 
 Due to the small memory size we are working with, the `wav2bin.py` script automatically mixes all stereo files into mono. If you want to replicate a stereo audio image, you'd have to split it up in two seperate mono wav files and place them in your `samples` folder, before running `wav2bin.py`. This split can be done in most DAWs or using [ffmpeg](https://ffmpeg.org/download.html) in the terminal:
