@@ -70,7 +70,7 @@ $ python wav2bin.py samples/
 
 <br>
 
-**Step 3:** Flash Daisy bootloader
+**Step 3:** Flash the Daisy bootloader
 
 ```shell
 $ make program-boot
