@@ -129,20 +129,21 @@ If the sample bank failed validation and didn't load,`Example.cpp` catches this 
 
 #### Sample Rate
 
-`wav2bin.py` accepts different wav files of varying sample rates and converts them all to specified rate. So, make sure the rate you enter in **Step 2** is identical to the sample rate you set for your Daisy hardware object. If the rates don't match, clips will still load and play, just at the wrong pitch/speed. The sample rate stored in the bank isn't automatically resampled to the hardware's rate at runtime.
+`wav2bin.py` accepts wav files of varying sample rates and converts them all to the rate you specify in **Step 2**. Though, at the moment there is no built in anti-alias filter for when the wav files have a higher sample rate than the one specified. 
 
-For example, if you set your initialization as
+`SamplePlayer` compensates for any difference between the specified rate and your Daisy hardware's audio sample rate, using a ratio, so clips play back at the correct pitch/speed even if rate don't match.
+
+Matching the two avoids the amount of extra interpolation the compensation introduces. Deliberately mismatching is a valid choice for baking in low bandwidth samples at a lower rate than the hardware to save memory. What matters is that the rate you pass to the SamplePlayer `Init()` should reflect what you set on the hardware object, so the compensation is accurate like so
 ```c++
 int main(void)
 {
     hw.Init();
-    hw.SetAudioSampleRate(Daisy::SaiHandle::Config::SampleRate::SAI_48KHZ);
-
-    // ...
+    hw.SetAudioSampleRate(Daisy::SaiHandle::Config::SampleRate::SAI_96KHZ);
+    // ...
+    sampler.Init(sampleBase, hw.AudioSampleRate());
 }
 ```
-then be sure to run
-
+And you can save double the memory if you lower the rate in **Step2** as follows
 ```shell
 python wav2bin.py samples/ --rate 48000
 ```

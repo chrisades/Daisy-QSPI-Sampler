@@ -97,7 +97,7 @@ class SamplePlayer
 
     uint32_t sampleBase_;
 
-    //float rateRatio_;
+    float rateRatio_;
 
     Voice voices_[MAX_CLIPS];
  

@@ -74,9 +74,9 @@ void SamplePlayer::Init(uint32_t sampleBase, float hardwareSampleRate)
         + header_->numClips * sizeof(ClipEntry)
     );
 
-    // rateRatio_ = (hardwareSampleRate > 0.0f)
-    //     ? static_cast<float>(header_->sampleRate) / hardwareSampleRate
-    //     : 1.0f;
+    rateRatio_ = (hardwareSampleRate > 0.0f)
+        ? static_cast<float>(header_->sampleRate) / hardwareSampleRate
+        : 1.0f;
 
     for(uint32_t i = 0; i < MAX_CLIPS; i++)
     {
@@ -311,8 +311,7 @@ float SamplePlayer::GetPlaybackIncrement(uint32_t clip) const
     if(!IsValidClip(clip))
         return 0.0f;
 
-    //return voices_[clip].speed * rateRatio_;
-    return voices_[clip].speed;
+    return voices_[clip].speed * rateRatio_;
 }
 
 float SamplePlayer::Process()
