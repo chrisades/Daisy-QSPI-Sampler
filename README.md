@@ -143,7 +143,7 @@ int main(void)
     sampler.Init(sampleBase, hw.AudioSampleRate());
 }
 ```
-And you can save double the memory if you lower the rate in **Step2** as follows
+And you can save double the memory if you lower the rate in **Step 2** as follows
 ```shell
 python wav2bin.py samples/ --rate 48000
 ```
